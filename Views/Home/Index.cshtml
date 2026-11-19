@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="text-center mt-4">
+    <h1 class="display-5">Desarrollo de Servicios Web I</h1>
+    <p class="lead">Evaluación T1 - Grupo 08 - Pregunta 01</p>
+    <p class="text-muted">Aplicación web MVC en .NET Core con C# para el cálculo de utilidades y de notas finales.</p>
+    <p class="text-muted small">
+        Grupo 08: DELGADILLO VALDERRAMA, JEANPIERRE RICARDO (i202510240) ·
+        MALDONADO GARCIA, JOSE MIGUEL (i201113031) ·
+        RAMIREZ CUTIPA, GABRIELA (i201910614)
+    </p>
+</div>
+
+<div class="row justify-content-center g-4 mt-2">
+    <div class="col-md-5">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h2 class="h4">Cálculo de utilidades</h2>
+                <p class="text-muted">
+                    Ingresa tu salario mensual y los años que vienes trabajando en la institución
+                    para conocer el porcentaje y el monto de tus utilidades.
+                </p>
+                <a asp-controller="Utilidad" asp-action="Index" class="btn btn-primary">Calcular utilidades</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h2 class="h4">Nota final del instituto</h2>
+                <p class="text-muted">
+                    Ingresa las tres notas y el porcentaje de asistencia para obtener el promedio,
+                    la categoría y el porcentaje de beca del estudiante.
+                </p>
+                <a asp-controller="NotaFinal" asp-action="Index" class="btn btn-primary">Calcular nota final</a>
+            </div>
+        </div>
+    </div>
+</div>

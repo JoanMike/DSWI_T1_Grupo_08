@@ -1,0 +1,122 @@
+@model DSWI_T1_Grupo_08.ViewModels.UtilidadVm
+@{
+    ViewData["Title"] = "Cálculo de utilidades";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Cálculo de utilidades</h1>
+    <p class="text-center text-muted">
+        Ingresa tu salario mensual y los años que vienes trabajando en la institución.
+    </p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-controller="Utilidad" asp-action="Index" method="post" class="card card-body shadow-sm mt-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Entrada.salarioMensual" class="form-label">Salario mensual (S/)</label>
+                    <input asp-for="Entrada.salarioMensual" class="form-control" type="number" step="0.01" min="0.01"
+                           placeholder="Ejemplo: 2500.00" />
+                    <span asp-validation-for="Entrada.salarioMensual" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Entrada.aniosTrabajados" class="form-label">Años trabajando en la institución</label>
+                    <input asp-for="Entrada.aniosTrabajados" class="form-control" type="number" step="1" min="0" max="60"
+                           placeholder="Ejemplo: 3" />
+                    <span asp-validation-for="Entrada.aniosTrabajados" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Calcular utilidad</button>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.Resultado != null)
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-success shadow-sm mt-4">
+                    <div class="card-header bg-success text-white">Resultado del cálculo</div>
+                    <div class="card-body">
+                        <dl class="row mb-0">
+                            <dt class="col-sm-6">Salario mensual</dt>
+                            <dd class="col-sm-6 text-end">S/ @Model.Resultado.salarioMensual.ToString("N2")</dd>
+
+                            <dt class="col-sm-6">Años trabajados</dt>
+                            <dd class="col-sm-6 text-end">@Model.Resultado.aniosTrabajados</dd>
+
+                            <dt class="col-sm-6">Tramo de antigüedad</dt>
+                            <dd class="col-sm-6 text-end">@Model.Resultado.tramo</dd>
+
+                            <dt class="col-sm-6">Porcentaje de utilidad</dt>
+                            <dd class="col-sm-6 text-end">@Model.Resultado.porcentajeUtilidad.ToString("N0")%</dd>
+                        </dl>
+                        <hr />
+                        <dl class="row mb-0">
+                            <dt class="col-sm-6">Utilidad calculada</dt>
+                            <dd class="col-sm-6 text-end fw-bold">S/ @Model.Resultado.montoUtilidad.ToString("N2")</dd>
+
+                            <dt class="col-sm-6">Total a recibir</dt>
+                            <dd class="col-sm-6 text-end fw-bold text-success">S/ @Model.Resultado.totalRecibido.ToString("N2")</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="accordion mt-4" id="reglasUtilidad">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#tablaUtilidad" aria-expanded="false" aria-controls="tablaUtilidad">
+                            Ver cuadro de utilidades
+                        </button>
+                    </h2>
+                    <div id="tablaUtilidad" class="accordion-collapse collapse" data-bs-parent="#reglasUtilidad">
+                        <div class="accordion-body">
+                            <table class="table table-bordered table-sm mb-0">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Tiempo</th>
+                                        <th>Utilidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Menos de 1 año</td>
+                                        <td>5% del salario</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1 año o más y menos de 2 años</td>
+                                        <td>7% del salario</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2 años o más y menos de 5 años</td>
+                                        <td>10% del salario</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5 años o más y menos de 10 años</td>
+                                        <td>15% del salario</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10 años o más</td>
+                                        <td>20% del salario</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
