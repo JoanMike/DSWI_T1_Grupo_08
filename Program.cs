@@ -1,35 +1,42 @@
+using DSWI_T1_Grupo_08.Data;
+using DSWI_T1_Grupo_08.Repositories;
 using DSWI_T1_Grupo_08.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// MVC
 builder.Services.AddControllersWithViews();
 
+// DbContext
+builder.Services.AddDbContext<LibreriaBDContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LibreriaBD")));
+
+// Repositorios
+builder.Services.AddScoped<IAutorRepository, AutorRepository>();
+builder.Services.AddScoped<ILibroRepository, LibroRepository>();
+
 // Servicios
-builder.Services.AddScoped<UtilidadService>();
-builder.Services.AddScoped<NotaFinalService>();
+builder.Services.AddScoped<IAutorService, AutorService>();
+builder.Services.AddScoped<ILibroService, LibroService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
-
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
-
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
