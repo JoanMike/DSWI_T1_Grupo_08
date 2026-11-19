@@ -1,0 +1,38 @@
+@model Autore
+@{
+    ViewData["Title"] = "Editar autor";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Editar autor</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Edit" method="post" class="card card-body shadow-sm mt-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="AutorId" />
+                <input type="hidden" name="id" value="@Model.AutorId" />
+
+                <div class="mb-3">
+                    <label asp-for="Nombre" class="form-label">Nombre</label>
+                    <input asp-for="Nombre" class="form-control" maxlength="100" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Nacionalidad" class="form-label">Nacionalidad</label>
+                    <input asp-for="Nacionalidad" class="form-control" maxlength="50" />
+                    <span asp-validation-for="Nacionalidad" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a asp-action="Index" class="btn btn-secondary mt-2">Volver a la lista</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

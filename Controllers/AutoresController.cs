@@ -18,7 +18,7 @@ namespace DSWI_T1_Grupo_08.Controllers
             return View(await _service.obtenerTodos());
         }
 
-        public IActionResult Create() => View();
+        public IActionResult Create() => View(new Autore());
 
         [HttpPost]
         [ValidateAntiForgeryToken]

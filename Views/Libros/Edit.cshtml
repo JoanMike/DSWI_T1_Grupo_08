@@ -1,0 +1,62 @@
+@model Libro
+@{
+    ViewData["Title"] = "Editar libro";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Editar libro</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="Edit" method="post" class="card card-body shadow-sm mt-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="LibroId" />
+                <input type="hidden" name="id" value="@Model.LibroId" />
+
+                <div class="mb-3">
+                    <label asp-for="Titulo" class="form-label">Título</label>
+                    <input asp-for="Titulo" class="form-control" maxlength="100" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Genero" class="form-label">Género</label>
+                        <input asp-for="Genero" class="form-control" maxlength="50" />
+                        <span asp-validation-for="Genero" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="AñoPublicacion" class="form-label">Año de publicación</label>
+                        <input asp-for="AñoPublicacion" class="form-control" type="number" min="0" max="2100" />
+                        <span asp-validation-for="AñoPublicacion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Isbn" class="form-label">ISBN</label>
+                        <input asp-for="Isbn" class="form-control" maxlength="20" />
+                        <span asp-validation-for="Isbn" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="AutorId" class="form-label">Autor</label>
+                        <select asp-for="AutorId" class="form-select" asp-items="ViewBag.AutorId">
+                            <option value="">-- Seleccione autor --</option>
+                        </select>
+                        <span asp-validation-for="AutorId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a asp-action="Index" class="btn btn-secondary mt-2">Volver a la lista</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

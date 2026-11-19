@@ -1,0 +1,44 @@
+@model IEnumerable<Autore>
+@{
+    ViewData["Title"] = "Autores";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Autores</h1>
+    <p class="text-center text-muted">Mantenimiento de la tabla de autores.</p>
+
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <a asp-action="Create" class="btn btn-primary">Nuevo autor</a>
+        <span class="text-muted">Total de autores: @Model.Count()</span>
+    </div>
+
+    <table class="table table-bordered table-hover mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Nacionalidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No hay autores registrados.</td>
+                </tr>
+            }
+            @foreach (var autor in Model)
+            {
+                <tr>
+                    <td>@autor.AutorId</td>
+                    <td>@autor.Nombre</td>
+                    <td>@autor.Nacionalidad</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@autor.AutorId" class="btn btn-sm btn-warning">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,56 @@
+@model IEnumerable<Libro>
+@{
+    ViewData["Title"] = "Libros";
+    var autores = ViewBag.Autores as Dictionary<int, string>;
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Libros</h1>
+    <p class="text-center text-muted">Mantenimiento de la tabla de libros.</p>
+
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <a asp-action="Create" class="btn btn-primary">Nuevo libro</a>
+        <span class="text-muted">Total de libros: @Model.Count()</span>
+    </div>
+
+    <table class="table table-bordered table-hover mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>Código</th>
+                <th>Título</th>
+                <th>Género</th>
+                <th>Año</th>
+                <th>ISBN</th>
+                <th>Autor</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="7" class="text-center text-muted">No hay libros registrados.</td>
+                </tr>
+            }
+            @foreach (var libro in Model)
+            {
+                string nombreAutor = "-";
+                if (libro.AutorId.HasValue && autores != null && autores.TryGetValue(libro.AutorId.Value, out var nombre))
+                {
+                    nombreAutor = nombre;
+                }
+                <tr>
+                    <td>@libro.LibroId</td>
+                    <td>@libro.Titulo</td>
+                    <td>@libro.Genero</td>
+                    <td>@libro.AñoPublicacion</td>
+                    <td>@libro.Isbn</td>
+                    <td>@nombreAutor</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@libro.LibroId" class="btn btn-sm btn-warning">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

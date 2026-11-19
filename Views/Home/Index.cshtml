@@ -4,8 +4,8 @@
 
 <div class="text-center mt-4">
     <h1 class="display-5">Desarrollo de Servicios Web I</h1>
-    <p class="lead">Evaluación T1 - Grupo 08 - Pregunta 01</p>
-    <p class="text-muted">Aplicación web MVC en .NET Core con C# para el cálculo de utilidades y de notas finales.</p>
+    <p class="lead">Evaluación T1 - Grupo 08</p>
+    <p class="text-muted">Aplicación web MVC en .NET Core con C# para el cálculo de utilidades, notas finales y el mantenimiento de la librería.</p>
     <p class="text-muted small">
         Grupo 08: DELGADILLO VALDERRAMA, JEANPIERRE RICARDO (i202510240) ·
         MALDONADO GARCIA, JOSE MIGUEL (i201113031) ·
@@ -35,6 +35,30 @@
                     la categoría y el porcentaje de beca del estudiante.
                 </p>
                 <a asp-controller="NotaFinal" asp-action="Index" class="btn btn-primary">Calcular nota final</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="h4 text-center mt-5">Mantenimiento de la librería</h2>
+<p class="text-center text-muted">Listado, registro y edición de autores y libros con procedimientos almacenados.</p>
+
+<div class="row justify-content-center g-4">
+    <div class="col-md-5">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h3 class="h5">Autores</h3>
+                <p class="text-muted">Consulta, registra y edita los autores de la librería.</p>
+                <a asp-controller="Autores" asp-action="Index" class="btn btn-primary">Ver autores</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h3 class="h5">Libros</h3>
+                <p class="text-muted">Consulta, registra y edita los libros junto con su autor.</p>
+                <a asp-controller="Libros" asp-action="Index" class="btn btn-primary">Ver libros</a>
             </div>
         </div>
     </div>

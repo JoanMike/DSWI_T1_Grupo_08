@@ -19,14 +19,14 @@ namespace DSWI_T1_Grupo_08.Controllers
         public async Task<IActionResult> Index()
         {
             var autores = await _autorService.obtenerTodos();
-            ViewBag.Autores = autores.ToDictionary(a => a.AutorId, a => a.Nombre);
+            ViewBag.Autores = autores.ToDictionary(a => a.AutorId, a => a.Nombre ?? "Sin nombre");
             return View(await _libroService.obtenerTodos());
         }
 
         public async Task<IActionResult> Create()
         {
             await CargarAutores();
-            return View();
+            return View(new Libro());
         }
 
         [HttpPost]
